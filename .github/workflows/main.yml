@@ -31,11 +31,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+          cache: 'yarn'
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install
       - name: Build
-        run: pnpm run build
+        run: yarn run build
       - name: Fix NotFound
         run: cp out/index.html out/404.html
       - name: Setup Pages
