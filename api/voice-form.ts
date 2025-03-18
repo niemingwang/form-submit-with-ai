@@ -9,7 +9,7 @@ export async function blockAI(voice: string) {
     response_mode: "blocking",
   };
 
-  const resp = await fetch("/workflows/run", {
+  const resp = await fetch("https://wf.zhycit.com/v1/workflows/run", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
