@@ -21,8 +21,8 @@ export default function DefaultLayout({
           </div>
         </main>
       </ScrollShadow>
-      <footer className="w-full  bg-background flex items-center justify-center">
-        <div className={"w-full px-8 py-4"}>
+      <footer className="w-full bg-background flex items-center justify-center">
+        <div className={"w-full max-w-3xl px-8 py-4"}>
           <VoiceInput />
         </div>
       </footer>

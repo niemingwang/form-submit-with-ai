@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addToast, closeAll } from "@heroui/toast";
 
 import VoiceFormContext from "./context";
@@ -23,40 +23,57 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [voiceText, setVoiceText] = useState("");
   const [voicing, setVoicing] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
-  useEffect(() => {
-    function getVoiceFormText() {
-      addToast({
-        title: "处理中",
-        promise: new Promise(async (resolve) => {
-          const res = await blockAI(
-            `下面这句话，请帮我格式化表单格式，比如${buildFieldMappingString().slice(0, -1)}，
-            按照json格式输出，注意不要把字段名放到字段值中。\n\n ${voiceText}`,
-          );
+  const startAnalysis = (text: string) => {
+    setFetching(true);
 
-          if (res.data) {
-            const data = cleanData(res.data.outputs.Text) as VoiceForm;
+    addToast({
+      title: "AI 智能识别中...",
+      color: "primary",
+      promise: new Promise(async (resolve) => {
+        const res = await blockAI(
+          `下面这句话，请帮我格式化表单格式，比如${buildFieldMappingString().slice(0, -1)}，
+            按照json格式输出，注意不要把字段名放到字段值中，不涉及的字段不输出。\n\n ${text}`,
+        );
 
-            setForm(data);
-          }
+        if (res.data) {
+          const data = cleanData(res.data.outputs.Text) as VoiceForm;
 
-          resolve(res);
-          setVoiceText("");
-          closeAll();
+          Object.keys(data).forEach((key) => {
+            if (
+              form.hasOwnProperty(key) &&
+              data[key as keyof VoiceForm] !== undefined &&
+              data[key as keyof VoiceForm] !== ""
+            ) {
+              updateForm({ [key]: data[key as keyof VoiceForm] });
+            }
+          });
+        }
 
-          addToast({ title: "处理完成", color: "success", timeout: 2000 });
-        }),
-      });
-    }
+        resolve(res);
+        closeAll();
 
-    if (voiceText) {
-      getVoiceFormText();
-    }
-  }, [voiceText]);
+        addToast({ title: "识别完成", color: "success", timeout: 2000 });
+      }).finally(() => {
+        setFetching(false);
+      }),
+    });
+  };
 
   return (
     <VoiceFormContext.Provider
-      value={{ voiceText, setVoiceText, voicing, setVoicing, form, updateForm }}
+      value={{
+        voiceText,
+        setVoiceText,
+        voicing,
+        setVoicing,
+        form,
+        updateForm,
+        fetching,
+        setFetching,
+        startAnalysis,
+      }}
     >
       {children}
     </VoiceFormContext.Provider>

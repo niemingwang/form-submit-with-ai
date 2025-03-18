@@ -39,14 +39,14 @@ export const formFields = [
     isRequired: true,
     errorMessage: "必填项",
   },
-  {
-    name: "gift",
-    label: "赠品",
-    type: "text",
-    placeholder: "请输入赠品",
-    isRequired: true,
-    errorMessage: "必填项",
-  },
+  // {
+  //   name: "gift",
+  //   label: "赠品",
+  //   type: "text",
+  //   placeholder: "请输入赠品",
+  //   isRequired: true,
+  //   errorMessage: "必填项",
+  // },
 ];
 
 export function buildFieldMappingString() {

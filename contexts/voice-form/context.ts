@@ -10,6 +10,9 @@ export interface FormContextType {
   setVoicing: (voicing: boolean) => void;
   voiceText: string;
   setVoiceText: (text: string) => void;
+  fetching: boolean;
+  setFetching: (fetching: boolean) => void;
+  startAnalysis: (text: string) => void;
 }
 
 const VoiceFormContext = createContext<FormContextType | undefined>(undefined);
