@@ -28,23 +28,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.3.0
         with:
           node-version: 20
-          cache: 'npm'
+#          cache: 'npm'
       - name: Install dependencies
         run: npm install
       - name: Build
         run: npm run build
-#      - name: Fix NotFound
-#        run: cp out/index.html out/404.html
+      - name: Fix NotFound
+        run: cp pnpm-lock.yaml out/pnpm-lock.yaml
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: './out'
+          path: 'out'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
