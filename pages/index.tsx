@@ -6,7 +6,6 @@ import { ToastProvider } from "@heroui/toast";
 
 import DefaultLayout from "@/layouts/default";
 import { formFields } from "@/config/form";
-import { VoiceButton } from "@/components/voice-button";
 import { VoiceForm } from "@/types/voice-form";
 import VoiceFormContext from "@/contexts/voice-form/context";
 
@@ -28,7 +27,6 @@ export default function IndexPage() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData.entries());
 
-    console.log(data);
     updateForm(data);
   };
 
@@ -64,25 +62,22 @@ export default function IndexPage() {
           <Button fullWidth color="primary" type="submit">
             提交
           </Button>
-          <div className={"grid grid-cols-3 gap-2"}>
-            <VoiceButton />
-            <Button
-              type="reset"
-              variant="flat"
-              onPress={() =>
-                updateForm({
-                  activityName: "",
-                  orderType: "",
-                  activityProd: "",
-                  activityPrice: "",
-                  count: "",
-                  gift: "",
-                })
-              }
-            >
-              重置
-            </Button>
-          </div>
+          <Button
+            type="reset"
+            variant="flat"
+            onPress={() =>
+              updateForm({
+                activityName: "",
+                orderType: "",
+                activityProd: "",
+                activityPrice: "",
+                count: "",
+                gift: "",
+              })
+            }
+          >
+            重置
+          </Button>
         </div>
       </Form>
     </DefaultLayout>

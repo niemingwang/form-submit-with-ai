@@ -38,8 +38,6 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
             const data = cleanData(res.data.outputs.Text) as VoiceForm;
 
             setForm(data);
-
-            console.log(data);
           }
 
           resolve(res);
