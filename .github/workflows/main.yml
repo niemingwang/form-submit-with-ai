@@ -36,8 +36,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-      - name: Fix NotFound
-        run: cp out/index.html out/404.html
+#      - name: Fix NotFound
+#        run: cp out/index.html out/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
@@ -48,4 +48,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      
+
