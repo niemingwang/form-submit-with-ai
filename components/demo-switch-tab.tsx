@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Tab, Tabs } from "@heroui/tabs";
 
 import VoiceFormContext from "@/contexts/voice-form/context";
-import { ArrowDownIcon } from "@/components/icons";
 
 const tabs = [
   {
@@ -11,15 +10,19 @@ const tabs = [
   },
   {
     key: "form",
-    title: "智慧表单",
+    title: "表单助手",
   },
   {
     key: "report",
-    title: "智慧周报",
+    title: "智能周报",
   },
   {
     key: "create",
     title: "智能创作",
+  },
+  {
+    key: "other",
+    title: "其他功能",
   },
 ];
 
@@ -36,15 +39,14 @@ export const DemoSwitchTab = () => {
     throw new Error("VoiceFormContext 未提供值");
   }
 
-  const { setTab, setFormType, setVoiceText, setReportType } = context;
+  const { setTab, setFormType, setVoiceText, setReportType, setCreateType } =
+    context;
 
   const updateDemoType = (key: React.Key) => {
-    if (key !== "form") {
-      setVoiceText("");
-    } else {
-      setFormType(undefined);
-    }
+    setVoiceText("");
+    setFormType(undefined);
     setReportType(undefined);
+    setCreateType(undefined);
     setTab(key as TabType);
   };
 
@@ -52,8 +54,10 @@ export const DemoSwitchTab = () => {
     <Tabs
       fullWidth
       aria-label="Options"
-      className={"max-w-3xl mx-auto"}
+      className={"w-full"}
       color="primary"
+      radius={"sm"}
+      size={"lg"}
       onSelectionChange={updateDemoType}
     >
       {tabs.map((item) =>
@@ -72,7 +76,7 @@ export const DemoSwitchTab = () => {
             title={
               <div className="flex items-center space-x-1">
                 <span>{item.title}</span>
-                <ArrowDownIcon size={18} />
+                {/*<ArrowDownIcon size={18} />*/}
               </div>
             }
           />

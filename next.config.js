@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
+  distDir: "form-submit-with-ai",
   basePath: "/form-submit-with-ai",
   reactStrictMode: true,
   async rewrites() {

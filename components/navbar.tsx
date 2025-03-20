@@ -9,7 +9,6 @@ import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { Logo } from "@/components/icons";
 import { siteConfig } from "@/config/site";
-import { DemoSwitchTab } from "@/components/demo-switch-tab";
 
 export const Navbar = () => {
   return (
@@ -40,9 +39,6 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarContent>
       </HeroUINavbar>
-      <div className={"w-full flex px-4"}>
-        <DemoSwitchTab />
-      </div>
     </div>
   );
 };

@@ -14,7 +14,16 @@ const VoiceInput = () => {
     throw new Error("VoiceFormContext 未提供值");
   }
 
-  const { setVoiceText, fetching, voiceText, startAnalysis, tab } = context;
+  const {
+    setVoiceText,
+    fetching,
+    voiceText,
+    startAnalysis,
+    tab,
+    formType,
+    reportType,
+    createType,
+  } = context;
 
   const updateVoiceText = () => {
     setVoiceText(text);
@@ -25,9 +34,21 @@ const VoiceInput = () => {
     if (!voiceText) {
       setText("");
     }
-  }, [voiceText]);
+  }, [voiceText, tab]);
 
-  if (tab === "bi") {
+  if (tab === "bi" || tab === "other") {
+    return null;
+  }
+
+  if (tab === "form" && !formType) {
+    return null;
+  }
+
+  if (tab === "report" && !reportType) {
+    return null;
+  }
+
+  if (tab === "create" && !createType) {
     return null;
   }
 
@@ -45,7 +66,7 @@ const VoiceInput = () => {
       />
       <Button
         className={"bg-custom-gradient text-white"}
-        isDisabled={text.length === 0 || fetching}
+        isDisabled={text.length === 0 || fetching || !formType}
         onPress={updateVoiceText}
       >
         确定

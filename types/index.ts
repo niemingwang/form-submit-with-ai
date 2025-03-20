@@ -5,8 +5,16 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export enum ReportType {
-  SALE_25 = "Sale25",
-  SALE_24 = "Sale24",
-  STOCK = "stock",
-  DE_CAP = "decap",
+  WEEK_REPORT_MONTH = "WeekReportMonth",
+  WEEK_REPORT = "WeekReport",
+  WEEK_REPORT_STOCK = "WeekStock",
+  WEEK_REPORT_DE_CAP = "ReportDecap",
+}
+
+// 智能创作
+export enum CreateType {
+  MAKE_SPEECH = "MakeSpeech",
+  THINK_REPORT = "ThinkReport",
+  PROMOTION_TEXT = "PromotionText",
+  SUMMARY_REPORT = "SummaryReport",
 }

@@ -4,6 +4,7 @@ import { Head } from "./head";
 
 import { Navbar } from "@/components/navbar";
 import VoiceInput from "@/components/voice-input";
+import { DemoSwitchTab } from "@/components/demo-switch-tab";
 
 export default function DefaultLayout({
   children,
@@ -21,10 +22,11 @@ export default function DefaultLayout({
           </div>
         </main>
       </ScrollShadow>
-      <footer className="w-full bg-background flex items-center justify-center">
+      <footer className="w-full bg-background flex flex-col items-center justify-center">
         <div className={"w-full max-w-3xl px-8 py-4"}>
           <VoiceInput />
         </div>
+        <DemoSwitchTab />
       </footer>
     </div>
   );

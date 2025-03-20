@@ -7,7 +7,8 @@ import VoiceFormContext from "@/contexts/voice-form/context";
 import { FormAssistant } from "@/components/demos/form-assistant";
 import { SelectFormModal } from "@/components/select-form-modal";
 import { SelectReportModal } from "@/components/select-report-modal";
-import { Report } from "@/components/demos/report";
+import { SmartReport } from "@/components/demos/smart-report";
+import { SelectCreateModal } from "@/components/select-create-modal";
 
 export default function IndexPage({ children }: { children: React.ReactNode }) {
   const context = useContext(VoiceFormContext);
@@ -16,7 +17,7 @@ export default function IndexPage({ children }: { children: React.ReactNode }) {
     throw new Error("VoiceFormContext 未提供值");
   }
 
-  const { tab, formType, reportType } = context;
+  const { tab, formType, reportType, createType } = context;
 
   if (tab === "bi") {
     return (
@@ -58,6 +59,13 @@ export default function IndexPage({ children }: { children: React.ReactNode }) {
           </DefaultLayout>
         );
       }
+      case "4": {
+        return (
+          <DefaultLayout>
+            <FormAssistant />
+          </DefaultLayout>
+        );
+      }
       default:
         return (
           <DefaultLayout>
@@ -77,7 +85,23 @@ export default function IndexPage({ children }: { children: React.ReactNode }) {
     } else {
       return (
         <DefaultLayout>
-          <Report />
+          <SmartReport />
+        </DefaultLayout>
+      );
+    }
+  }
+
+  if (tab === "create") {
+    if (!createType) {
+      return (
+        <DefaultLayout>
+          <SelectCreateModal />
+        </DefaultLayout>
+      );
+    } else {
+      return (
+        <DefaultLayout>
+          <SmartReport />
         </DefaultLayout>
       );
     }

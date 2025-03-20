@@ -1,6 +1,11 @@
 import { createContext } from "react";
 
-import { FormType, ReportType, VoiceForm } from "@/types/voice-form";
+import {
+  CreateType,
+  FormType,
+  ReportType,
+  VoiceForm,
+} from "@/types/voice-form";
 import { TabType } from "@/components/demo-switch-tab";
 
 // 定义 Context 类型
@@ -15,6 +20,10 @@ export interface FormContextType {
   // 报告类型
   reportType: ReportType;
   setReportType: (report: ReportType) => void;
+
+  // 创作类型
+  createType: CreateType;
+  setCreateType: (report: CreateType) => void;
 
   form: VoiceForm;
   updateForm: (newForm: Partial<VoiceForm>) => void;

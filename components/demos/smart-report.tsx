@@ -11,24 +11,24 @@ import { ReportType } from "@/types";
 
 const images = [
   {
-    key: ReportType.SALE_25,
+    key: ReportType.WEEK_REPORT_MONTH,
     img: Sale25,
   },
   {
-    key: ReportType.SALE_24,
+    key: ReportType.WEEK_REPORT,
     img: Sale24,
   },
   {
-    key: ReportType.STOCK,
+    key: ReportType.WEEK_REPORT_STOCK,
     img: stock,
   },
   {
-    key: ReportType.DE_CAP,
+    key: ReportType.WEEK_REPORT_DE_CAP,
     img: decap,
   },
 ];
 
-export const Report = () => {
+export const SmartReport = () => {
   const context = useContext(VoiceFormContext);
 
   if (!context) {
@@ -38,6 +38,10 @@ export const Report = () => {
   const { reportType } = context;
 
   return (
-    <Image src={images.find((item) => item.key === reportType)?.img.src} />
+    <Image
+      radius={"none"}
+      src={images.find((item) => item.key === reportType)?.img.src}
+      width={"100%"}
+    />
   );
 };

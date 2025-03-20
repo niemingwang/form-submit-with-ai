@@ -37,14 +37,14 @@ jobs:
       - name: Build
         run: npm run build
       - name: Fix NotFound
-        run: cp pnpm-lock.yaml out/pnpm-lock.yaml
+        run: cp pnpm-lock.yaml form-submit-with-ai/pnpm-lock.yaml
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: 'out'
+          path: 'form-submit-with-ai'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

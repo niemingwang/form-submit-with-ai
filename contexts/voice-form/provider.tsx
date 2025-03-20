@@ -5,16 +5,23 @@ import { addToast, closeAll } from "@heroui/toast";
 
 import VoiceFormContext from "./context";
 
-import { FormType, ReportType, VoiceForm } from "@/types/voice-form";
+import {
+  CreateType,
+  FormType,
+  ReportType,
+  VoiceForm,
+} from "@/types/voice-form";
 import { blockAI } from "@/api/voice-form";
 import { buildFieldMappingString, cleanData } from "@/config/form";
 
 const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
-  const [tab, setTab] = useState<TabType>("form");
+  const [tab, setTab] = useState<TabType>("bi");
   // 表单助手类型
   const [formType, setFormType] = useState<FormType>(undefined);
   // 报告类型
   const [reportType, setReportType] = useState<ReportType>(undefined);
+  // 创作类型
+  const [createType, setCreateType] = useState<CreateType>(undefined);
 
   const [form, setForm] = useState<VoiceForm>({
     activityName: "",
@@ -78,6 +85,8 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
         setFormType,
         reportType,
         setReportType,
+        createType,
+        setCreateType,
         voiceText,
         setVoiceText,
         voicing,
