@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "AI 辅助表单提交",
+  name: "AI 助手",
   description: "",
   navItems: [],
   navMenuItems: [],

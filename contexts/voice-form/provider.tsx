@@ -1,13 +1,21 @@
+import type { TabType } from "@/components/demo-switch-tab";
+
 import { useState } from "react";
 import { addToast, closeAll } from "@heroui/toast";
 
 import VoiceFormContext from "./context";
 
-import { VoiceForm } from "@/types/voice-form";
+import { FormType, ReportType, VoiceForm } from "@/types/voice-form";
 import { blockAI } from "@/api/voice-form";
 import { buildFieldMappingString, cleanData } from "@/config/form";
 
 const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
+  const [tab, setTab] = useState<TabType>("form");
+  // 表单助手类型
+  const [formType, setFormType] = useState<FormType>(undefined);
+  // 报告类型
+  const [reportType, setReportType] = useState<ReportType>(undefined);
+
   const [form, setForm] = useState<VoiceForm>({
     activityName: "",
     orderType: "",
@@ -64,6 +72,12 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <VoiceFormContext.Provider
       value={{
+        tab,
+        setTab,
+        formType,
+        setFormType,
+        reportType,
+        setReportType,
         voiceText,
         setVoiceText,
         voicing,

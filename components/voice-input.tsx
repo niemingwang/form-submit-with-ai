@@ -14,7 +14,7 @@ const VoiceInput = () => {
     throw new Error("VoiceFormContext 未提供值");
   }
 
-  const { setVoiceText, fetching, voiceText, startAnalysis } = context;
+  const { setVoiceText, fetching, voiceText, startAnalysis, tab } = context;
 
   const updateVoiceText = () => {
     setVoiceText(text);
@@ -26,6 +26,10 @@ const VoiceInput = () => {
       setText("");
     }
   }, [voiceText]);
+
+  if (tab === "bi") {
+    return null;
+  }
 
   return (
     <div className="w-full flex flex-col gap-2">
