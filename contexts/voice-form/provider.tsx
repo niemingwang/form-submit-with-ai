@@ -20,8 +20,10 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
   const [formType, setFormType] = useState<FormType>(undefined);
   // 报告类型
   const [reportType, setReportType] = useState<ReportType>(undefined);
+  const [reportPrompt, setReportPrompt] = useState<string>("");
   // 创作类型
   const [createType, setCreateType] = useState<CreateType>(undefined);
+  const [createPrompt, setCreatePrompt] = useState<string>("");
 
   const [form, setForm] = useState<VoiceForm>({
     activityName: "",
@@ -85,8 +87,12 @@ const VoiceFormProvider = ({ children }: { children: React.ReactNode }) => {
         setFormType,
         reportType,
         setReportType,
+        reportPrompt,
+        setReportPrompt,
         createType,
         setCreateType,
+        createPrompt,
+        setCreatePrompt,
         voiceText,
         setVoiceText,
         voicing,

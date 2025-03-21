@@ -1,47 +1,67 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Image } from "@heroui/image";
+import { addToast, closeAll } from "@heroui/toast";
 
-import Sale25 from "../../public/assets/images/report/sale-25.png";
-import Sale24 from "../../public/assets/images/report/sale-24.png";
-import stock from "../../public/assets/images/report/stock.png";
-import decap from "../../public/assets/images/report/decap.png";
+import First from "../../public/assets/images/report/first.png";
+import Second from "../../public/assets/images/report/second.png";
 
 import VoiceFormContext from "@/contexts/voice-form/context";
-import { ReportType } from "@/types";
-
-const images = [
-  {
-    key: ReportType.WEEK_REPORT_MONTH,
-    img: Sale25,
-  },
-  {
-    key: ReportType.WEEK_REPORT,
-    img: Sale24,
-  },
-  {
-    key: ReportType.WEEK_REPORT_STOCK,
-    img: stock,
-  },
-  {
-    key: ReportType.WEEK_REPORT_DE_CAP,
-    img: decap,
-  },
-];
+import { Loading } from "@/components/loading";
 
 export const SmartReport = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+
   const context = useContext(VoiceFormContext);
 
   if (!context) {
     throw new Error("VoiceFormContext 未提供值");
   }
 
-  const { reportType } = context;
+  const { reportPrompt, setReportType, setVoiceText, setReportPrompt } =
+    context;
+
+  useEffect(() => {
+    if (reportPrompt) {
+      addToast({
+        title: "AI 智能处理中...",
+        color: "primary",
+        promise: new Promise((resolve) => {
+          setTimeout(() => {
+            closeAll();
+
+            addToast({
+              title: "已处理",
+              color: "success",
+              timeout: 2000,
+            });
+
+            setTimeout(() => {
+              setReportType(undefined);
+              setReportPrompt("");
+              setVoiceText("");
+              resolve(true);
+              closeAll();
+            }, 2000);
+          }, 2000);
+        }),
+      });
+    }
+  }, [reportPrompt]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   return (
-    <Image
-      radius={"none"}
-      src={images.find((item) => item.key === reportType)?.img.src}
-      width={"100%"}
-    />
+    <Loading loading={loading}>
+      <Image
+        className={"z-[1]"}
+        radius={"none"}
+        src={loading ? First.src : Second.src}
+        width={"100%"}
+      />
+    </Loading>
   );
 };

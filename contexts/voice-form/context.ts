@@ -19,10 +19,14 @@ export interface FormContextType {
 
   // 报告类型
   reportType: ReportType;
+  reportPrompt: string;
+  setReportPrompt: (prompt: string) => void;
   setReportType: (report: ReportType) => void;
 
   // 创作类型
   createType: CreateType;
+  createPrompt: string;
+  setCreatePrompt: (prompt: string) => void;
   setCreateType: (report: CreateType) => void;
 
   form: VoiceForm;

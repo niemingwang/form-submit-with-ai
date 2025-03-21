@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import { Button } from "@heroui/button";
-import { Link } from "@heroui/link";
 
 import DefaultLayout from "@/layouts/default";
 import VoiceFormContext from "@/contexts/voice-form/context";
@@ -9,6 +7,8 @@ import { SelectFormModal } from "@/components/select-form-modal";
 import { SelectReportModal } from "@/components/select-report-modal";
 import { SmartReport } from "@/components/demos/smart-report";
 import { SelectCreateModal } from "@/components/select-create-modal";
+import { SmartCreate } from "@/components/demos/smart-create";
+import { ChatBI } from "@/components/demos/chat-bi";
 
 export default function IndexPage({ children }: { children: React.ReactNode }) {
   const context = useContext(VoiceFormContext);
@@ -21,17 +21,8 @@ export default function IndexPage({ children }: { children: React.ReactNode }) {
 
   if (tab === "bi") {
     return (
-      <DefaultLayout>
-        <div className={"h-full w-full flex items-center justify-center pt-10"}>
-          <Button
-            showAnchorIcon
-            as={Link}
-            color={"primary"}
-            href={"https://chatbi.cloud.tencent.com/"}
-          >
-            前往 ChatBI
-          </Button>
-        </div>
+      <DefaultLayout hideNav>
+        <ChatBI />
       </DefaultLayout>
     );
   }
@@ -101,7 +92,7 @@ export default function IndexPage({ children }: { children: React.ReactNode }) {
     } else {
       return (
         <DefaultLayout>
-          <SmartReport />
+          <SmartCreate />
         </DefaultLayout>
       );
     }

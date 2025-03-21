@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
-import { ToastProvider } from "@heroui/toast";
+import { addToast, ToastProvider } from "@heroui/toast";
+import { isEmpty } from "lodash-es";
 
 import VoiceFormContext from "@/contexts/voice-form/context";
 
@@ -15,6 +16,8 @@ const VoiceInput = () => {
   }
 
   const {
+    setReportPrompt,
+    setCreatePrompt,
     setVoiceText,
     fetching,
     voiceText,
@@ -26,15 +29,34 @@ const VoiceInput = () => {
   } = context;
 
   const updateVoiceText = () => {
-    setVoiceText(text);
-    startAnalysis(text);
+    if (isEmpty(text)) {
+      addToast({
+        title: "请先输入提示词",
+        timeout: 1000,
+        color: "warning",
+      });
+
+      return;
+    }
+    if (tab === "form") {
+      setVoiceText(text);
+      startAnalysis(text);
+    }
+
+    if (tab === "report") {
+      setReportPrompt(text);
+    }
+
+    if (tab === "create") {
+      setCreatePrompt(text);
+    }
   };
 
   useEffect(() => {
     if (!voiceText) {
       setText("");
     }
-  }, [voiceText, tab]);
+  }, [voiceText, tab, formType, reportType, createType]);
 
   if (tab === "bi" || tab === "other") {
     return null;
@@ -66,7 +88,7 @@ const VoiceInput = () => {
       />
       <Button
         className={"bg-custom-gradient text-white"}
-        isDisabled={text.length === 0 || fetching || !formType}
+        isDisabled={fetching}
         onPress={updateVoiceText}
       >
         确定
