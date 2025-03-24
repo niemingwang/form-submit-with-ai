@@ -26,7 +26,7 @@ export const SmartCreate = () => {
       setTimeout(() => {
         setLoading(false);
         setImgSrc(Second.src);
-        // setCreateType(undefined);
+        // setCreateType(undefined); // 用来返回到初始页面
         setCreatePrompt("");
         setVoiceText("");
       }, 2000);

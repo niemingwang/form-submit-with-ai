@@ -17,11 +17,13 @@ export const Navbar = () => {
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand className="gap-3 max-w-fit">
             <NextLink
-              className="flex justify-start items-center gap-1"
+              className="flex justify-start items-center gap-2"
               href="/"
             >
               <Logo />
-              <p className="font-bold text-inherit">{siteConfig.name}</p>
+              <p className="font-bold text-inherit text-xl">
+                {siteConfig.name}
+              </p>
             </NextLink>
           </NavbarBrand>
         </NavbarContent>
